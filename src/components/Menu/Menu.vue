@@ -1,0 +1,88 @@
+<template>
+  <el-menu
+    class="el-menu-vertical-demo"
+    background-color="#545c64"
+    text-color="#fff"
+    active-text-color="#ffd04b"
+    :collapse="isCollapse"
+    :default-active="currentPath"
+    router
+  >
+    <template v-for="(item, idx) in menu">
+      <el-menu-item v-if="item.hidden" style="padding-left: 0;padding-right: 0;" :index="item.componentName" :key="item.componentName">
+        <el-tooltip class="item" :disabled="!isCollapse" effect="dark" :content="item.name" placement="right">
+          <div>
+            <i class="el-icon-menu"></i>
+            <span v-text="item.name"></span>
+          </div>
+        </el-tooltip>
+      </el-menu-item>
+      <el-submenu v-else :index="item.id" :key="item.id">
+        <template slot="title">
+          <i :class="icon[idx]"></i>
+          <span v-text="item.name"></span>
+        </template>
+        <el-menu-item class="navigation" v-for="sub in item.sub" :key="sub.componentName" :index="sub.componentName" v-text="sub.name">
+        </el-menu-item>
+      </el-submenu>
+    </template>
+  </el-menu>
+</template>
+
+<script>
+import menu from '@/filters/menus'
+import bus from '../../libs/bus'
+export default {
+  name: 'Menu',
+  data () {
+    return {
+      menu,
+      isCollapse: false,
+      icon: ['el-icon-menu', 'el-icon-location'],
+      currentPath: this.$route.path
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this.currentPath = to.path
+    }
+  },
+  methods: {
+  },
+  mounted () {
+    bus.$on('abc', function (e) {
+      this.isCollapse = e
+    }.bind(this))
+  }
+}
+</script>
+
+<style scoped>
+  .el-menu-vertical-demo {
+    width: 65px;
+    height: 100%;
+    border: none;
+    overflow: auto;
+  }
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .navigation {
+    background-color: #3a4045 !important;
+    padding: 0 20px !important;
+  }
+  .navigation:hover {
+    background-color: #2d3439 !important;
+  }
+  .left .el-tooltip__popper,
+  .right .el-tooltip__popper {
+    padding: 8px 10px;
+  }
+  .item{
+    padding: 0 20px;
+  }
+</style>
