@@ -7,6 +7,7 @@ import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store/store'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/display.css'
 import '@/styles/index.css'
 import '@/assets/icon/iconfont.css'
 
