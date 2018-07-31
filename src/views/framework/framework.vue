@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
   .el-header, .el-footer {
-    background-color: #4c535e;
+    background-color: #616161;
     color: #fff;
     text-align: center;
     line-height: 60px;
@@ -48,7 +48,7 @@ export default {
     line-height: 200px;
   }
   .el-main {
-    background-color: #f0f2f5;
+    background-color: #f5f5f5;
     color: #333;
     text-align: center;
     line-height: 160px;

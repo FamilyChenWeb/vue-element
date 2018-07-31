@@ -1,9 +1,9 @@
 <template>
   <el-menu
     class="el-menu-vertical-demo"
-    background-color="#545c64"
+    background-color="#757575"
     text-color="#fff"
-    active-text-color="#ffd04b"
+    active-text-color="#ffeb3b"
     :collapse="isCollapse"
     :default-active="currentPath"
     router
@@ -72,11 +72,11 @@ export default {
     display: none;
   }
   .navigation {
-    background-color: #3a4045 !important;
+    background-color: #424242 !important;
     padding: 0 20px !important;
   }
   .navigation:hover {
-    background-color: #2d3439 !important;
+    background-color: #212121 !important;
   }
   .left .el-tooltip__popper,
   .right .el-tooltip__popper {
