@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    class="el-menu-vertical-demo"
+    :class="screenWidth<767.98 ? 'el-menu-vertical-demo screen_width' : 'el-menu-vertical-demo'"
     background-color="#757575"
     text-color="#fff"
     active-text-color="#ffeb3b"
@@ -39,7 +39,8 @@ export default {
       menu,
       isCollapse: false,
       icon: ['el-icon-menu', 'el-icon-location'],
-      currentPath: this.$route.path
+      currentPath: this.$route.path,
+      screenWidth: document.body.clientWidth
     }
   },
   watch: {
@@ -50,9 +51,18 @@ export default {
   methods: {
   },
   mounted () {
-    bus.$on('abc', function (e) {
+    bus.$on('handleClick', function (e, res) {
       this.isCollapse = e
+      this.screenWidth = res
+      console.log(`789`,this.screenWidth)
     }.bind(this))
+  },
+  created () {
+    if (this.screenWidth < 767.98) {
+      this.isCollapse = true
+    } else {
+      this.isCollapse = e
+    }
   }
 }
 </script>
@@ -67,6 +77,9 @@ export default {
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
+  }
+  .screen_width {
+    width: 0px;
   }
   ::-webkit-scrollbar {
     display: none;
