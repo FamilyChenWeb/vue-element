@@ -1,7 +1,7 @@
 <template>
-    <div class="login_box">
+    <!--<div class="login_box">
       <div class="login_border">
-        <!--头部logo-->
+        &lt;!&ndash;头部logo&ndash;&gt;
         <div class="login_logo">
           <img src="../../assets/logo.png" />
           <h1>后台登录</h1>
@@ -39,12 +39,30 @@
           <a href="#">注册账号</a>
         </p>
       </div>
-    </div>
+    </div>-->
+  <el-container>
+    <el-header>
+      <LoginHead />
+    </el-header>
+    <el-container>
+      <el-container>
+        <el-main>
+        <LoginContent />
+        </el-main>
+      </el-container>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
+import LoginHead from './components/loginHead'
+import LoginContent from './components/loginContent'
 export default {
   name: 'login',
+  components: {
+    LoginHead,
+    LoginContent
+  },
   data () {
     return {
       account: '',
@@ -93,6 +111,13 @@ export default {
 </script>
 
 <style scoped>
+  .el-main {
+    background-color: #f5f5f5;
+    color: #333;
+    text-align: center;
+    padding: 0;
+  }
+
   .login_box {
     width: 100%;
     height: 100%;

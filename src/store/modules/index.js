@@ -1,11 +1,6 @@
 
-const mutations = {
-  add (state) {
-    state.count++
-  },
-  reduce (state) {
-    state.count--
-  }
+const b = {
+  a: 6666
 }
 
-export default mutations
+export default b

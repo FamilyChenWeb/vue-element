@@ -51,7 +51,6 @@ export default {
     background-color: #f5f5f5;
     color: #333;
     text-align: center;
-    line-height: 160px;
     padding: 0;
   }
   .el-footer {

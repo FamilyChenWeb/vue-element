@@ -6,6 +6,9 @@
     active-text-color="#ffeb3b"
     :collapse="isCollapse"
     :default-active="currentPath"
+    @open="handleOpen"
+    @close="handleClose"
+    @select="handleSelect"
     router
   >
     <template v-for="(item, idx) in menu">
@@ -49,19 +52,33 @@ export default {
     }
   },
   methods: {
+    handleOpen (key, keyPath) {
+      console.log (key, keyPath)
+    },
+    handleClose (key, keyPath) {
+      console.log (key, keyPath)
+    },
+    handleSelect () {
+      if (this.screenWidth < 767.98) {
+        this.isCollapse = true
+        bus.$emit('cs', true, '测试点击隐藏')
+      } else {
+      }
+    }
   },
   mounted () {
     bus.$on('handleClick', function (e, res) {
       this.isCollapse = e
       this.screenWidth = res
-      console.log(`789`,this.screenWidth)
     }.bind(this))
   },
   created () {
     if (this.screenWidth < 767.98) {
+      console.log(this.isCollapse)
       this.isCollapse = true
     } else {
-      this.isCollapse = e
+      // this.isCollapse = e
+      console.log(this.isCollapse)
     }
   }
 }

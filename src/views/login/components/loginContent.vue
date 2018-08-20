@@ -3,76 +3,88 @@
     <el-row>
       <el-col :sm="24">
         <div class="grid-content box_bj">
-          <span class="head_text">Lucky 总奖池：123.0000 eth</span>
+          <span class="head_text">Lucky Seven 总奖池：123.0000 eth</span>
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="15">
       <el-col :sm="10" :xs="24">
         <div class="grid-content">
-          <div class="portrait_bj flex">
-            <div class="portrait">头像</div>
-            <div class="flex_column">
-              <span class="name">LJM1313</span>
-              <span class="boss">Lucky Boss</span>
-            </div>
-          </div>
           <el-row class="box_bj box_bottom">
             <div class="situation_list">
-              <div class="text_left">
-                <span>当前进入的时间</span>
-              </div>
-              <div class="text_right">
-                <span>2018-02-25 12.00.00</span>
-              </div>
+              <span>你参与了吗？</span>
             </div>
             <div class="situation_list">
-              <div class="text_left">
-                <span>团队情况</span>
-              </div>
-              <div class="text_right">
-                <span>123人</span>
-              </div>
+              <span>Lucky Seven 等着你！</span>
             </div>
             <div class="situation_list">
-              <div class="text_left">
-                <span>参与轮盘</span>
-              </div>
-              <div class="text_right">
-                <span>123次</span>
-              </div>
-            </div>
-            <div class="line"></div>
-            <div class="situation_list">
-              <div class="text_left">
-                <span>eth钱包</span>
-              </div>
-              <div class="text_right">
-                <span>123eth</span>
-              </div>
-            </div>
-            <div class="situation_list">
-              <div class="text_left">
-                <el-button class="top_up">充值</el-button>
-              </div>
-              <div class="text_right">
-                <el-button class="top_up">提现</el-button>
-              </div>
-            </div>
-            <div class="line"></div>
-            <div class="situation_list">
-              <div class="text_left">
-                <span>游戏卷</span>
-              </div>
-              <div class="text_right">
-                <span>123张</span>
+              <div>
+                <el-button class="top_up top_up_width" @click="dialogFormVisible = true">登录</el-button>
               </div>
             </div>
             <div class="situation_list">
               <div>
-                <el-button class="top_up top_up_width">购买游戏卷</el-button>
+                <el-button class="top_up top_up_width" @click="dialogFormVisible1 = true">注册</el-button>
               </div>
             </div>
+            <!--登录弹窗-->
+            <el-dialog title="登录" :visible.sync="dialogFormVisible">
+              <div class="prompt">
+                <el-input
+                  type="text"
+                  placeholder="请输入账号"
+                  v-model="account"
+                  @blur="user_name"
+                  clearable>
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </el-input>
+                <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs}}</span>
+              </div>
+              <div class="prompt">
+                <el-input
+                  type="password"
+                  placeholder="请输入密码"
+                  v-model="password"
+                  @blur="user_password"
+                  clearable>
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </el-input>
+                <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs1}}</span>
+              </div>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogFormVisible = false">登 录</el-button>
+              </div>
+            </el-dialog>
+            <!--注册弹窗-->
+            <el-dialog title="注册" :visible.sync="dialogFormVisible1">
+              <div class="prompt">
+                <el-input
+                  type="text"
+                  placeholder="请输入账号"
+                  v-model="account"
+                  @blur="user_name"
+                  clearable>
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </el-input>
+                <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs}}</span>
+              </div>
+              <div class="prompt">
+                <el-input
+                  type="password"
+                  placeholder="请输入密码"
+                  v-model="password"
+                  @blur="user_password"
+                  clearable>
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </el-input>
+                <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs1}}</span>
+              </div>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible1 = false">取 消</el-button>
+                <el-button type="primary" @click="dialogFormVisible1 = false">注 册</el-button>
+              </div>
+            </el-dialog>
           </el-row>
 
           <el-row>
@@ -112,73 +124,37 @@
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="15">
-      <el-col :sm="24">
-        <div class="grid-content">
-          <div class="box_bj" style="overflow: hidden; padding: 0 15px;">
-            <span class="text_left">最后30位打款id</span>
-          </div>
-          <el-table
-            :data="tableData"
-            stripe
-            style="width: 100%">
-            <el-table-column
-              prop="name"
-              label="用户"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="已消费"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="address"
-              label="参与时段">
-            </el-table-column>
-            <el-table-column
-              prop="date"
-              label="交易时间">
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-col>
-    </el-row>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home',
-  data() {
+  name: 'loginContent',
+  data () {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      dialogFormVisible: false,
+      dialogFormVisible1: false,
+      account: '',
+      password: '',
+      cs: '',
+      cs1: '',
+      formLabelWidth: '120px'
     }
   },
   methods: {
-    tableRowClassName({row, rowIndex}) {
-      if (rowIndex === 1) {
-        return 'warning-row';
-      } else if (rowIndex === 3) {
-        return 'success-row';
+    user_name () {
+      if (!/^[0-9]*$/.test(this.account)) {
+        this.cs = '只能输入数字'
+      } else {
+        this.cs = ''
       }
-      return '';
+    },
+    user_password () {
+      if (!/^[A-Za-z]*$/.test(this.password)) {
+        this.cs1 = '只能输入英文'
+      } else {
+        this.cs1 = ''
+      }
     }
   }
 }
@@ -327,5 +303,13 @@ export default {
   }
   .el-table {
     text-align: left;
+  }
+  .prompt {
+    margin-bottom: 14px;
+  }
+  .prompt span{
+    height: 14px;
+    line-height: 14px;
+    float: left;
   }
 </style>

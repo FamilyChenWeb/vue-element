@@ -1,0 +1,15 @@
+/*覆盖element-ui的一些样式*/
+
+.el-popup-parent--hidden {
+  padding: 0 !important;
+}
+.el-dialog__wrapper {
+  padding: 0 15px;
+}
+.el-dialog {
+  width: 100%;
+  max-width: 500px;
+}
+.el-dialog__body {
+  padding: 0 15px;
+}

@@ -55,8 +55,11 @@ export default {
           that.isLog = true
           that.handleClick()
         }
-      }) ()
+      })()
     }
+    bus.$on('cs', function (e, er) {
+      this.isLog = e
+    }.bind(this))
   },
   // 初始化完成时的事件写在这里
   created () {

@@ -1,6 +1,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import index from './modules/index'
 
 Vue.use(Vuex)
 
@@ -45,6 +46,7 @@ const moduleA = {
 
 export default new Vuex.Store({
   modules: {
-    a: moduleA
+    a: moduleA,
+    index
   }
 })

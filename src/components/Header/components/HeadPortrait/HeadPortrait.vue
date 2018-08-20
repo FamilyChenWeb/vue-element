@@ -3,7 +3,8 @@
     <el-dropdown trigger="click">
       <div class="portrait el-dropdown-link">
         <div class="portrait_img"></div>
-        <span class="portrait_name">Name<i class="el-icon-arrow-down el-icon--right"></i></span>
+        <!--<span class="portrait_name">Name<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i></span>-->
+        <span class="portrait_name">{{$t('message.hello')}}</span>
       </div>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>退出登录</el-dropdown-item>

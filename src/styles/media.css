@@ -1,0 +1,43 @@
+/*移动端*/
+@media (max-width: 767.98px) {
+  .cs {
+    margin-top: 15px;
+  }
+  .button {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: #ffcccc;
+    border-radius: 100%;
+    margin: 0 auto;
+  }
+}
+
+/*平板*/
+@media (min-width: 767.98px) {
+  .button {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #ffcccc;
+    border-radius: 100%;
+    margin: 0 auto;
+  }
+}
+
+/*电脑*/
+@media (min-width: 1200px) {
+  .button {
+    position: relative;
+    width:600px;
+    height: 600px;
+    background-color: #ffcccc;
+    border-radius: 100%;
+    margin: 0 auto;
+  }
+  .button_position {
+    width: 200px !important;
+    height: 200px !important;
+    line-height: 200px !important;
+  }
+}
