@@ -3,7 +3,7 @@
     <div class="logo">
       <div class="logo_img"></div>
       <h1>LOGO</h1>
-      </div>
+    </div>
     <div class="header_right">
       <div class="header_function">
         <HeaderFunction />
