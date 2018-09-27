@@ -1,7 +1,7 @@
 <template>
-    <!--<div class="login_box">
+    <div class="login_box">
       <div class="login_border">
-        &lt;!&ndash;头部logo&ndash;&gt;
+        <!--头部logo-->
         <div class="login_logo">
           <img src="../../assets/logo.png" />
           <h1>后台登录</h1>
@@ -18,7 +18,7 @@
             clearable>
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs}}</span>
+          <span class="warning">{{warning1}}</span>
         </div>
         <div class="login_list">
           <el-input
@@ -29,7 +29,7 @@
             clearable>
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs1}}</span>
+          <span class="warning">{{warning2}}</span>
         </div>
         <div class="login_list">
           <el-button type="primary" @click="login_btn">登录</el-button>
@@ -39,36 +39,18 @@
           <a href="#">注册账号</a>
         </p>
       </div>
-    </div>-->
-  <el-container>
-    <el-header>
-      <LoginHead />
-    </el-header>
-    <el-container>
-      <el-container>
-        <el-main>
-        <LoginContent />
-        </el-main>
-      </el-container>
-    </el-container>
-  </el-container>
+    </div>
 </template>
 
 <script>
-import LoginHead from './components/loginHead'
-import LoginContent from './components/loginContent'
 export default {
   name: 'login',
-  components: {
-    LoginHead,
-    LoginContent
-  },
   data () {
     return {
       account: '',
       password: '',
-      cs: '',
-      cs1: ''
+      warning1: '',
+      warning2: ''
     }
   },
   methods: {
@@ -77,16 +59,16 @@ export default {
     },
     user_name () {
       if (!/^[0-9]*$/.test(this.account)) {
-        this.cs = '只能输入数字'
+        this.warning1 = '只能输入数字'
       } else {
-        this.cs = ''
+        this.warning1 = ''
       }
     },
     user_password () {
       if (!/^[A-Za-z]*$/.test(this.password)) {
-        this.cs1 = '只能输入英文'
+        this.warning2 = '只能输入英文'
       } else {
-        this.cs1 = ''
+        this.warning2 = ''
       }
     }
   },
@@ -163,6 +145,12 @@ export default {
   }
   .el-input {
     font-size: 18px;
+  }
+  .warning {
+    float: left;
+    color: #f00;
+    padding: 5px 0 5px 10px;
+    font-size: 14px;
   }
   .el-button {
     width: 100%;
