@@ -1,13 +1,23 @@
 <template>
-    <!--<div class="login_box">
+    <div class="login_box">
       <div class="login_border">
-        &lt;!&ndash;头部logo&ndash;&gt;
+        <!--头部logo-->
         <div class="login_logo">
           <img src="../../assets/logo.png" />
           <h1>后台登录</h1>
           <div class="login_translation">
-            中英
+            中 英
           </div>
+        </div>
+        <div class="login_list">
+          <el-input
+            type="text"
+            placeholder="请输入key"
+            v-model="key"
+            clearable>
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-input>
+          <span class="warning"></span>
         </div>
         <div class="login_list">
           <el-input
@@ -18,7 +28,7 @@
             clearable>
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs}}</span>
+          <span class="warning">{{warning1}}</span>
         </div>
         <div class="login_list">
           <el-input
@@ -29,7 +39,7 @@
             clearable>
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <span style="float: left; color: #f00; padding: 5px 0 5px 10px; font-size: 14px;">{{cs1}}</span>
+          <span class="warning">{{warning2}}</span>
         </div>
         <div class="login_list">
           <el-button type="primary" @click="login_btn">登录</el-button>
@@ -39,54 +49,51 @@
           <a href="#">注册账号</a>
         </p>
       </div>
-    </div>-->
-  <el-container>
-    <el-header>
-      <LoginHead />
-    </el-header>
-    <el-container>
-      <el-container>
-        <el-main>
-        <LoginContent />
-        </el-main>
-      </el-container>
-    </el-container>
-  </el-container>
+    </div>
 </template>
 
 <script>
-import LoginHead from './components/loginHead'
-import LoginContent from './components/loginContent'
+import { base, login } from '../../api/api'
 export default {
   name: 'login',
-  components: {
-    LoginHead,
-    LoginContent
-  },
   data () {
     return {
-      account: '',
+      key: '00d91e8e0cca2b76f515926a36db68f5',
+      account: '13594347817',
       password: '',
-      cs: '',
-      cs1: ''
+      warning1: '',
+      warning2: ''
     }
   },
   methods: {
     login_btn () {
-      console.log(this.account, this.password, `点击登录了`)
+      const url = base + login + '?key=' + this.key + '&phone=' + this.account + '&passwd=' + this.password
+      const param = { key: this.key, phone: this.account, passwd: this.password }
+      this.$http.get( url ).then(res => {
+        if (res.data.code === 200 && res.data.msg === '成功!') {
+          console.log(`登录成功`)
+          this.$store.commit('set_token', res.data.data.key);
+          this.$router.push('/');
+        } else {
+          this.$router.replace('/login')
+          console.log(`账号密码或错误`)
+        }
+      }).catch(error => {
+        console.log(`登录出错了`, error)
+      })
     },
     user_name () {
       if (!/^[0-9]*$/.test(this.account)) {
-        this.cs = '只能输入数字'
+        this.warning1 = '只能输入数字'
       } else {
-        this.cs = ''
+        this.warning1 = ''
       }
     },
     user_password () {
       if (!/^[A-Za-z]*$/.test(this.password)) {
-        this.cs1 = '只能输入英文'
+        this.warning2 = '只能输入英文'
       } else {
-        this.cs1 = ''
+        this.warning2 = ''
       }
     }
   },
@@ -163,6 +170,12 @@ export default {
   }
   .el-input {
     font-size: 18px;
+  }
+  .warning {
+    float: left;
+    color: #f00;
+    padding: 5px 0 5px 10px;
+    font-size: 14px;
   }
   .el-button {
     width: 100%;
