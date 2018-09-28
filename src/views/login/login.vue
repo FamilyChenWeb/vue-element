@@ -6,8 +6,18 @@
           <img src="../../assets/logo.png" />
           <h1>后台登录</h1>
           <div class="login_translation">
-            中英
+            中 英
           </div>
+        </div>
+        <div class="login_list">
+          <el-input
+            type="text"
+            placeholder="请输入key"
+            v-model="key"
+            clearable>
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-input>
+          <span class="warning"></span>
         </div>
         <div class="login_list">
           <el-input
@@ -43,11 +53,13 @@
 </template>
 
 <script>
+import { base, login } from '../../api/api'
 export default {
   name: 'login',
   data () {
     return {
-      account: '',
+      key: '00d91e8e0cca2b76f515926a36db68f5',
+      account: '13594347817',
       password: '',
       warning1: '',
       warning2: ''
@@ -55,7 +67,20 @@ export default {
   },
   methods: {
     login_btn () {
-      console.log(this.account, this.password, `点击登录了`)
+      const url = base + login + '?key=' + this.key + '&phone=' + this.account + '&passwd=' + this.password
+      const param = { key: this.key, phone: this.account, passwd: this.password }
+      this.$http.get( url ).then(res => {
+        if (res.data.code === 200 && res.data.msg === '成功!') {
+          console.log(`登录成功`)
+          this.$store.commit('set_token', res.data.data.key);
+          this.$router.push('/');
+        } else {
+          this.$router.replace('/login')
+          console.log(`账号密码或错误`)
+        }
+      }).catch(error => {
+        console.log(`登录出错了`, error)
+      })
     },
     user_name () {
       if (!/^[0-9]*$/.test(this.account)) {

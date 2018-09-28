@@ -1,11 +1,6 @@
 <template>
   <div>
-    <h3>{{$store.state.count}}******{{count}}----{{$store.state.a.count}}</h3>
     <p>{{$t('message.hello')}}</p>
-    <p>
-      <button @click="$store.commit('add', 10)">+ + +</button>
-      <button @click="reduce">- - -</button>
-    </p>
     <p>
       <button @click="addAction">英 文</button>
       <button @click="reduceAction">中 文</button>

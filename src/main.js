@@ -1,12 +1,12 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import Vuex from 'vuex'
 import router from './router'
 import Axios from 'axios'
-import VueAxios from 'vue-axios'
 import store from './store/store'
+import './intercept'
 import i18n from './lang'
+
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/icon/iconfont.css'
 
@@ -15,7 +15,7 @@ import '@/styles/index.css'
 import '@/styles/media.css'
 import '@/styles/theme.scss'
 
-Vue.use(VueAxios, Axios)
+Vue.use(Vuex)
 
 import {
   Container,
@@ -77,7 +77,7 @@ Vue.use(Form)
 Vue.component(MessageBox.name, MessageBox)
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$msgbox = MessageBox
-
+Vue.prototype.$http = Axios
 
 Vue.config.productionTip = false
 

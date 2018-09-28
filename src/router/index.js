@@ -11,46 +11,54 @@ import index4 from '@/views/index4'
 
 Vue.use(Router)
 
-let routes = [
-  {
-    path: '/login',
-    component: Login,
-    name: 'login'
-  },
-  {
-    path: '/404',
-    component: error,
-    name: 'error'
-  },
-  {
-    path: '/',
-    component: Framework,
-    redirect: '/home',
-    name: 'home',
-    children: [
-      {
-        path: '/home',
-        component: Home
+const router = new Router({
+  routes: [
+    {
+      path: '/login',
+      component: Login,
+      name: 'login'
+    },
+    {
+      path: '/404',
+      component: error,
+      meta: {
+        requireAuth: true
       },
-      {
-        path: '/index2',
-        component: index2
+      name: 'error'
+    },
+    {
+      path: '/',
+      component: Framework,
+      redirect: '/home',
+      name: 'home',
+      meta: {
+        requireAuth: true
       },
-      {
-        path: '/index3',
-        component: index3
-      },
-      {
-        path: '/index4',
-        component: index4
-      }
-    ]
-  },
-  {
-    path: '*',
-    redirect: '/404',
-    name: '404'
-  }
-]
+      children: [
+        {
+          path: '/home',
+          component: Home
+        },
+        {
+          path: '/index2',
+          component: index2
+        },
+        {
+          path: '/index3',
+          component: index3
+        },
+        {
+          path: '/index4',
+          component: index4
+        }
+      ]
+    },
+    {
+      path: '*',
+      redirect: '/404',
+      name: '404'
+    }
+  ]
+})
 
-export default new Router({mode: 'history', routes})
+export default router
